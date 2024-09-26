@@ -16,9 +16,8 @@ let etiquetas = `<div>
 <div> Detalle ${auto.detalle}</div>
 <div> Precio ${auto.precio}</div>
 <div> Stock ${auto.stock}</div>
-<div> Imagen <img src="${auto.imagen}" alt="Imagen del auto widht="150" height="150" /></div>
+<div> Imagen <img src=${auto.imagen} alt="Imagen del auto" widht="150" height="150" /></div>
 </div>
 `
-
 let main = document.querySelector("main");
 main.innerHTML = etiquetas;
