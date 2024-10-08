@@ -1,7 +1,7 @@
 let menu = [
-    {texto: "Inicio", href: "inicio.html"},
-    {texto: "Productos", href: "productos.html"},
-    {texto: "Contacto", href: "contacto.html"}
+    {texto: "Inicio", href:"inicio.html"},
+    {texto: "Productos", href:"productos.html"},
+    {texto: "Contacto", href:"contacto.html"}
 ];
 let header = document.querySelector("header");
 let arrayHTML = [];
