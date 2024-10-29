@@ -1,21 +1,9 @@
-// class Producto {
-//     constructor(titulo, detalle, precio, stock , imagen){
-//     this.titulo = titulo;
-//     this.detalle = detalle;
-//     this.precio = precio;
-//     this.stock = stock;
-//     this.imagen = imagen;
-// }
-// }
-
-// const auto = new Producto("auto" , "fachero ", "100$", 120, "https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app/1.jpg");
-
 const main = document.querySelector("main");
 
 const elemento = window.location.search.split("=")[1];
 
 const autos = [
-    {
+  {
     id: 1,
     modelo: "Tundra",
     descripcion: "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.",
@@ -77,46 +65,33 @@ const carFind = autos.find((autos) => autos.id == elemento);
 
 let etiquetas = `<div class="producto-container">
     <div class="producto-main">
-        <div class="left-section">
-            <img src="${carFind.url}" style="width: 50vh; height: 50vh;" alt="Zenbook Pro 14" id="main-image">
+        <div class="left-section" style= "display:grid; justify-content: center;">
+            <img src="${carFind.url}" style="width: 80vh; height: 50vh; object-fit:cover;" alt="Zenbook Pro 14" id="main-image">
         </div>
-
-        <div class="center-section">
-            <div class="product-info">
-                <h1 class="producto-h1">${carFind.modelo}</h1>
-                <p class="description">${carFind.descripcion}</p>
-                <div class="rating">
-                    <span>⭐⭐⭐⭐⭐</span> <a href="#">(3)</a>
-                </div>
-                <p class="original-price">${carFind.precio}</p>
-                <p class="discounted-price">$25.000 <span class="discount">(5% OFF)</span></p>
-                <p class="installments">In 6 installments of $673,799.78</p>
-            </div>
+<div class="input-group">
+          <button class="btn btn-outline-secondary" type="button" onclick="sum()">+</button>
+          <input type="text" id="numberInput" class="form-control" placeholder="0" aria-label="Recipient's username with two button addons">
+          <button class="btn btn-outline-secondary" type="button" onclick="rest()">-</button>
         </div>
-
-        <div class="right-section">
-            <div class="shipping-info">
-                <h3>Free Standard International Shipping.</h3>
-                <p>Estimated between Tue, Oct 22 and Wed, Nov 6.</p>
-                <p class="bold">25 available</p>
-                <div class="quantity-selector">
-                    <label for="quantity" class="quantity-label">Quantity:</label>
-                    <select id="quantity" class="quantity-dropdown">
-                        <option value="1">1 unit</option>
-                        <option value="2">2 units</option>
-                        <option value="3">3 units</option>
-                        <option value="4">4 units</option>
-                        <option value="5">5 units</option>
-                        <option value="6">6 units</option>
-                    </select>
-                </div>
-            <button class="btn primary-btn">Buy it now</button>
-            <button class="btn secondary-btn">Add to cart</button>
-        </div>
-    </div>
-</div>`;
-
-
+        <div style="display: flex; justify-content: center; align-items: center;">
+        ${localStorage.getItem("email") ?
+    `<button>Comprar</button>` :
+    `<a href="login.html">Inicia sesión para comprar</a>`
+  }
+          </div>`
 
 
 main.innerHTML = etiquetas;
+const input = document.getElementById("numberInput");
+
+function sum() {
+  let currentValue = parseInt(input.value) || 0;
+  input.value = currentValue + 1;
+}
+
+function rest() {
+  let currentValue = parseInt(input.value) || 0;
+  if (currentValue > 0) {
+    input.value = currentValue - 1;
+  }
+}

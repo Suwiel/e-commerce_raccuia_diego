@@ -1,6 +1,5 @@
-const h1 = document.querySelector("h1");
-h1.innerText = "Productos";
-
+let h1 = document.querySelector("h1")
+h1.innerHTML = "PRODUCTOS"
 const autos = [
   {
     id: 1,
@@ -74,7 +73,7 @@ function cards(autos) {
                         <div class="img-container"><img src="${auto.url}" alt="Nike Air Zoom Pegasus 39 Shield" class="imagen-ajustada"></div>
                         <div class="card-body">
                             <h5 class="card-title">Car ${auto.model}</h5>
-                            <p class="card-text">${auto.description.substring(0, 20)}...</p>
+                            <p class="card-text">${auto.description.slice(0, 20)}...</p>
                             <p class="card-price">${auto.price}</p>
                             <p class="card-text">${auto.category}</p>
                             <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">See more</a></button>
@@ -88,12 +87,15 @@ function cards(autos) {
 function filterList(category) {
   if (category === "todos") {
     cards(autos);
+    h1.innerHTML = "PRODUCTOS"
   } else if (category === "Moderno") {
     const moderno = autos.filter((auto) => auto.category === "Moderno");
     cards(moderno);
+    h1.innerText = "MODERNOS";
   } else if (category === "Vintage") {
     const vintage = autos.filter(auto => auto.category === "Vintage");
     cards(vintage);
+    h1.innerText = "VINTAGE";
   }
 }
 cards(autos);
@@ -106,7 +108,6 @@ let resetBtn = document.querySelector(".Reset")
 const filterFunction = () => {
   const section = document.querySelector("section");
   const filtered = autos.filter((auto) => busqInput.value.toLowerCase() === auto.model.toLowerCase());
-
   if (filtered.length > 0) {
     const filterData = filtered.map((auto) => `<div class="card"> 
                         <div class="img-container"><img src="${auto.url}" alt="Nike Air Zoom Pegasus 39 Shield" class="imagen-ajustada"></div>
@@ -125,19 +126,7 @@ const filterFunction = () => {
 
 const resetInput = () => {
   busqInput.value = "";
-  const mainContent = autos.map((auto) => `<div class="card"> 
-                        <div class="img-container"><img src="${auto.url}" alt="Nike Air Zoom Pegasus 39 Shield" class="imagen-ajustada"></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Car ${auto.model}</h5>
-                            <p class="card-text">${auto.description.substring(0, 20)}...</p>
-                            <p class="card-price">${auto.price}</p>
-                            <p class="card-text">${auto.category}</p>
-                            <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">See more</a></button>
-                            <p class="card-text"><small class="text-body-secondary">Last updated 32 mins ago</small></p>
-                        </div>
-                    </div>`);
-  const section = document.querySelector("section");
-  section.innerHTML = mainContent.join("");
+  cards(autos);
 }
 
 
