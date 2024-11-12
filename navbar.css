@@ -1,0 +1,28 @@
+.navbar {
+    padding: 2px;
+    background-color: #4189f5;
+}
+
+.nav-item {
+    transition: 0.6s;
+    color: white;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.navbar-brand {
+    transition: 0.6s;
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: rgb(0, 0, 0);
+}
+
+.nav-item:hover {
+    color: black;
+}
+
+.navbar-collapse {
+    text-align: center;
+}

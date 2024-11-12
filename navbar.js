@@ -1,5 +1,5 @@
 let menu = [
-    { texto: "Productos", function: "index.html" },
+    { texto: "Productos", href: "index.html" },
     { texto: "Contacto", href: "index.html" },
     { texto: "X", href: "index.html" }
 ];
@@ -23,18 +23,20 @@ arrayHTML.push(
                     ${arrayHTML.join("")}
                 </div>
                 </div>
-                 <div class="navbar-nav ms-auto me-3">
-                    ${localStorage.getItem("email") ? 
-                        `<span>${localStorage.getItem("email")}</span> | <span onclick="logout()">Log out</span>` 
-                        : `<a href="login.html" class="text-decoration-none">Login</a>`
-                    }
+                 <div class="navbar-nav ms-auto me-3" style="color: white; padding:8px;">
+                    ${localStorage.getItem("email") ?
+        `<span style="padding-right: 10px;"> Hola, ${localStorage.getItem("email")}</span> | 
+        <a href="./cart.html" style="text-decoration: none; color: white; padding-right:10px;" > <li> <span class="material-symbols-outlined" style="padding-left:10px;">
+  shopping_cart_checkout</span> <b style="position:relative; bottom:4px;" id="quantity">${localStorage.getItem("quantity")}</b> </li> </a> | <span style="cursor: pointer; padding-left: 10px;" onclick="logout()">CERRAR SESIÓN</span>`
+        : `<a href="login.html" style="color: white; padding-left: 10px;" class="text-decoration-none">INICIAR SESIÓN</a>`
+    }
                 </div>
             </div>
         </nav>`)
 
 
 header.innerHTML = arrayHTML.join("");
-function logout(){
+function logout() {
     localStorage.clear()
     location.href = "./index.html"
 }
