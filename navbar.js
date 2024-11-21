@@ -5,13 +5,11 @@ let menu = [
 let header = document.querySelector("header");
 let arrayHTML = [];
 
-// Generar los enlaces principales del menú
 for (let elemento of menu) {
     arrayHTML.push(`
         <a class="nav-item nav-link" aria-current="page" href=${elemento.href}>${elemento.texto}</a>`);
 }
 
-// Generar el HTML del navbar
 header.innerHTML = `
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
