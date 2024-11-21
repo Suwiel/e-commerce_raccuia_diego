@@ -86,8 +86,7 @@ function cards(autos) {
                             <p class="card-price">${auto.price}</p>
                             <p class="card-text">${auto.category}</p>
                             <p class="card-text"> Stock: ${auto.stock}</p>
-                            <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">See more</a></button>
-                            <p class="card-text"><small class="text-body-secondary">Last updated 32 mins ago</small></p>
+                            <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">Ver más</a></button>
                         </div>
                     </div>`);
 
@@ -108,16 +107,20 @@ function filterList(category) {
     h1.innerText = "VINTAGE";
   }
 }
-cards(autos);
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => { resolve("ok") }, 1500)
+})
+promise.then(() => cards(autos))
 
 
 let busqInput = document.querySelector(".busq")
 let busqBtn = document.querySelector(".busqButton")
-let resetBtn = document.querySelector(".Reset")
+let resetBtn = document.querySelector(".reset")
 
 const filterFunction = () => {
   const section = document.querySelector("section");
-  const filtered = autos.filter((auto) => busqInput.value.toLowerCase() === auto.model.toLowerCase());
+  const filtered = autos.filter((auto) => auto.model.toLowerCase().includes(busqInput.value.toLowerCase()));
   if (filtered.length > 0) {
     const filterData = filtered.map((auto) => `<div class="card"> 
                         <div class="img-container"><img src="${auto.url}" alt="Nike Air Zoom Pegasus 39 Shield" class="imagen-ajustada"></div>
@@ -126,8 +129,8 @@ const filterFunction = () => {
                             <p class="card-text">${auto.description.substring(0, 20)}...</p>
                             <p class="card-price">${auto.price}</p>
                             <p class="card-text">${auto.category}</p>
-                            <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">See more</a></button>
-                            <p class="card-text"><small class="text-body-secondary">Last updated 32 mins ago</small></p>
+                            <p class="card-text"> Stock: ${auto.stock}</p>
+                            <button type="button" class="btn btn-outline-dark custom-btn-white"><a class="button-link" href="producto.html?prod=${auto.id}">Ver más</a></button>
                         </div>
                     </div>`);
     section.innerHTML = filterData.join("");
@@ -135,9 +138,22 @@ const filterFunction = () => {
 };
 
 const resetInput = () => {
+  const section = document.querySelector("section");
   busqInput.value = "";
-  cards(autos);
+  section.innerHTML = ` <section class="container pt-4 d-flex flex-wrap d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+        </section>`
+
+  const Opromise = new Promise((resolve, reject) => {
+    setTimeout(() => { resolve("ok") }, 1500)
+  })
+
+  Opromise.then(() => cards(autos))
 }
+
 
 
 busqBtn.addEventListener("click", filterFunction);

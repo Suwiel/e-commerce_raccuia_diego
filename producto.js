@@ -98,7 +98,7 @@ let etiquetas = `<div class="producto-container">
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
         ${localStorage.getItem("email") ?
-    `<button class="btn btn-outline-secondary" type="button" onclick="addItem()">Comprar</button>` :
+    `<button style="background-color: #16213E; color:white;" class="btn btn-outline-secondary" type="button" onclick="addItem()">Comprar</button>` :
     `<a href="login.html">Inicia sesión para comprar</a>`
   }
           </div>`
@@ -125,7 +125,9 @@ function addItem() {
   function add() {
     Toastify({
       text: `Agregaste ${input.value} producto/s al carrito de compras`,
-      style: { background: "#06f" },
+      style: { background: "#2f4686",},
+      duration: 1000,
+
     }).showToast();
 
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -162,7 +164,7 @@ function addItem() {
     cancelButtonText: "No",
     showCancelButton: true,
     showCloseButton: true,
-    confirmButtonColor: "#4189f5",
+    confirmButtonColor: "#16213E",
     cancelButtonColor: "#DB5079",
   }).then(result => {
     if (result.isConfirmed) {

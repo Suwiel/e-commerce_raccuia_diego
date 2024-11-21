@@ -59,15 +59,15 @@ function total(cards) {
 total(JSON.parse(localStorage.getItem("cart")))
 
 
-function clearCards(){
-  let quantity = 0; 
+function clearCards() {
+  let quantity = 0;
   let quantityTag = document.querySelector("#quantity");
-  localStorage.setItem("cart", JSON.stringify([])); 
-  localStorage.setItem("quantity", JSON.stringify(quantity)); 
-  quantityTag.innerText = quantity; 
-  getCart([]); 
-  total(0); 
-  document.querySelector("#btn-clear-cart").style.display = "none"; 
+  localStorage.setItem("cart", JSON.stringify([]));
+  localStorage.setItem("quantity", JSON.stringify(quantity));
+  quantityTag.innerText = quantity;
+  getCart([]);
+  total(0);
+  document.querySelector("#btn-clear-cart").style.display = "none";
 }
 
 function removeItem(id) {
@@ -84,4 +84,48 @@ function removeItem(id) {
   localStorage.setItem("quantity", quantity)
   const quantityTag = document.querySelector("#quantity")
   quantityTag.innerText = quantity
+}
+
+function checkout() {
+
+  const user = localStorage.getItem("email");
+  const cart = JSON.parse(localStorage.getItem("cart"));
+
+  if (!cart || cart.length === 0) {
+    Swal.fire({
+      text: "Tu carrito está vacío. Agrega productos antes de proceder al checkout.",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#E94560",
+    });
+    return;
+  }
+
+  const recurso = {
+    user,
+    items: cart,
+  };
+
+
+  fetch("https://673cf93f4db5a341d8339525.mockapi.io/cart", {
+    method: "POST",
+    body: JSON.stringify(recurso),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      Swal.fire({
+        text: `Gracias ${data.user}. Hemos registrado tu orden número ${data.id}`,
+        confirmButtonText: "Sí",
+        confirmButtonColor: "#06f",
+      });
+
+      clearCards();
+
+    })
+    .catch(() => {
+      Swal.fire({
+        text: "Ups, hubo un problema, intenta más tarde.",
+        confirmButtonText: "Sí",
+        confirmButtonColor: "#06f",
+      });
+    });
 }
